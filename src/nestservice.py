@@ -1,17 +1,18 @@
 #!/usr/bin/env python
 
 import rospy
-from std_srvs.srv import Empty, EmptyResponse
+from std_srvs.srv import Empty
 
 
-def test_callback(request):
+def test_callback(empty):
     print("Test called")
-    return EmptyResponse
+    return []
 
 
 rospy.init_node('nest_server')
-nest_service_server = rospy.Service('/nest_service', Empty, test_callback)
+rospy.Service('/nest_service', Empty, test_callback)
 
+rospy.spin()
 
 
 
