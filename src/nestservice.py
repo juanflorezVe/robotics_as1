@@ -12,9 +12,13 @@ turtlelist = []
 
 
 def turtle_creator(empty):
-    print("Test called")
-    positionrequest = SpawnRequest(random.uniform(0,10), random.uniform(0,10), random.uniform(0,2),'post'+str(random.randint(0,23)))
-    turtlelist.append(serviceclient(positionrequest))
+    counter = 5
+    while counter > 0:
+        print("Test called")
+        positionrequest = SpawnRequest(random.uniform(0,10), random.uniform(0,10), random.uniform(0,2),
+                                       'post'+str(counter))
+        turtlelist.append(serviceclient(positionrequest))
+        counter -= 1
     return []
 
 
