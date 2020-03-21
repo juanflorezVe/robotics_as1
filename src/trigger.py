@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 from std_srvs.srv import Empty, EmptyRequest
+
 import rospy
 
 rospy.init_node('trigger_pusher')
