@@ -4,6 +4,7 @@ import rospy
 import random
 from std_srvs.srv import Empty
 from turtlesim.srv import Spawn, SpawnRequest, SpawnResponse
+from r00184264.srv import TurtlesAmount
 
 
 rospy.wait_for_service('/spawn')
