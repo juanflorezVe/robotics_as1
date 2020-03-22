@@ -7,7 +7,11 @@ project(r00184264)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED)
+find_package(catkin REQUIRED COMPONENTS
+  std_msgs
+  message_generation
+  rospy
+)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -36,10 +40,7 @@ find_package(catkin REQUIRED)
 ##   * add "message_generation" and every package in MSG_DEP_SET to
 ##     find_package(catkin REQUIRED COMPONENTS ...)
 ##   * add "message_runtime" and every package in MSG_DEP_SET to
-       catkin_package(
-           CATKIN_DEPENDS
-           rospy
-       )
+##     catkin_package(CATKIN_DEPENDS ...)
 ##   * uncomment the add_*_files sections below as needed
 ##     and list every .msg/.srv/.action file to be processed
 ##   * uncomment the generate_messages entry below
@@ -54,7 +55,7 @@ add_message_files(
 ## Generate services in the 'srv' folder
 add_service_files(
    FILES
-   TurtlesAmount.srv
+  TurtlesAmount.srv
 )
 
 ## Generate actions in the 'action' folder
@@ -80,11 +81,7 @@ generate_messages(
 ##   * add a build_depend and a exec_depend tag for "dynamic_reconfigure"
 ## * In this file (CMakeLists.txt):
 ##   * add "dynamic_reconfigure" to
-find_package(catkin REQUIRED COMPONENTS
-   rospy
-   std_msgs
-   message_generation
-)
+##     find_package(catkin REQUIRED COMPONENTS ...)
 ##   * uncomment the "generate_dynamic_reconfigure_options" section below
 ##     and list every .cfg file to be processed
 
@@ -105,8 +102,8 @@ find_package(catkin REQUIRED COMPONENTS
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES r00184264
-#  CATKIN_DEPENDS other_catkin_pkg
+   LIBRARIES r00184264
+   CATKIN_DEPENDS rospy
 #  DEPENDS system_lib
 )
 
