@@ -13,4 +13,5 @@ request_object.amount = 3
 
 result = serviceclient(request_object)
 
-print "We created "+ str(result.total)
+print "We created "
+print result

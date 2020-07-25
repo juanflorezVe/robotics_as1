@@ -10,8 +10,15 @@
     <node pkg="r00184264_a1" type="nestservice.py" name="spawner" output="screen">
     </node>
 
+    <node pkg="r00184264_a1" type="pickupservice.py" name="pickup" output="screen">
+    </node>
+
     <node pkg="r00184264_a1" type="trigger.py" name="trigger" output="screen">
     </node>
+
+    <node pkg="r00184264_a1" type="picker.py" name="picker" output="screen">
+    </node>
+
 
 
 </launch>

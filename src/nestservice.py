@@ -32,7 +32,9 @@ def turtle_creator(request):
         loct.name = turtlelist[-1].name
         pub.publish(loct)
 
-    return [counter] #TODO
+        response = TurtlesAmountResponse()
+        response.total = len(turtlelist)
+    return response
 
 
 rospy.init_node('nest_server')

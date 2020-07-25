@@ -12,15 +12,27 @@ from r00184264_a1.msg import location
 
 print "HELLO I AM DISPATCHER"
 rospy.loginfo("Dispatcher file activated")
+turtlesinthefloor={}
 
 def react_to_new_turtle(data):
     rospy.loginfo("Dispatcher sees a new turtle is on the floor ")
     rospy.loginfo('{} -> {},{}'.format(data.name, data.x, data.y))
+    turtlesinthefloor[data.name]=(data.x, data.y)
 
-def lister_new_turtles():
+def listen_new_turtles():
     rospy.init_node("dispatcher")
     rospy.Subscriber("floor_topic", location, react_to_new_turtle)
 
 
-lister_new_turtles()
+def react_to_removed_turtle(data):
+    rospy.loginfo("{} was removed from the floor".format(data.name))
+
+def listen_removed_turtle():
+    rospy.init_node("dispatcher")
+    rospy.Subscriber("robot1_topic", location, react_to_removed_turtle)
+
+
+listen_new_turtles()
+listen_removed_turtle()
+
 rospy.spin()
