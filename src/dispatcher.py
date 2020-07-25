@@ -15,7 +15,7 @@ rospy.loginfo("Dispatcher file activated")
 
 def react_to_new_turtle(data):
     rospy.loginfo("Dispatcher sees a new turtle is on the floor ")
-    print ('{},{}'.format(data.x, data.y))
+    rospy.loginfo('{} -> {},{}'.format(data.name, data.x, data.y))
 
 def lister_new_turtles():
     rospy.init_node("dispatcher")

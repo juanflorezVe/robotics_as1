@@ -29,6 +29,7 @@ def turtle_creator(request):
         loct = location()
         loct.x = x_pos
         loct.y = y_pos
+        loct.name = turtlelist[-1].name
         pub.publish(loct)
 
     return [counter] #TODO
