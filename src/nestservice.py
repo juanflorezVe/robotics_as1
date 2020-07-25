@@ -14,9 +14,9 @@ serviceclient = rospy.ServiceProxy('/spawn', Spawn)
 turtlelist = []
 
 
-def turtle_creator(empty):
+def turtle_creator(request):
     rospy.loginfo("Initiating Cretion")
-    counter = 5
+    counter = request.amount
     while counter > 0:
         print("Test called")
         positionrequest = SpawnRequest(random.uniform(0,10), random.uniform(0,10), random.uniform(0,2),
