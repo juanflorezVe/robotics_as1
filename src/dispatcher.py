@@ -7,16 +7,19 @@
 
 import rospy
 from std_msgs.msg import String
+from turtlesim.srv import Spawn, SpawnRequest, SpawnResponse
+from r00184264_a1.msg import location
 
 print "HELLO I AM DISPATCHER"
 rospy.loginfo("Dispatcher file activated")
 
 def react_to_new_turtle(data):
     rospy.loginfo("Dispatcher sees a new turtle is on the floor ")
+    print ('{},{}'.format(data.x, data.y))
 
 def lister_new_turtles():
     rospy.init_node("dispatcher")
-    rospy.Subscriber("floor_topic", String, react_to_new_turtle)
+    rospy.Subscriber("floor_topic", location, react_to_new_turtle)
 
 
 lister_new_turtles()

@@ -7,6 +7,7 @@ import random
 from turtlesim.srv import Spawn, SpawnRequest, SpawnResponse
 from r00184264.srv import TurtlesAmount, TurtlesAmountResponse
 from std_msgs.msg import String
+from r00184264_a1.msg import location
 
 
 rospy.wait_for_service('/spawn')
@@ -14,16 +15,21 @@ serviceclient = rospy.ServiceProxy('/spawn', Spawn)
 turtlelist = []
 
 #create the floor_topic
-pub = rospy.Publisher("floor_topic", String, queue_size=15)
+pub = rospy.Publisher("floor_topic", location, queue_size=15)
 
 def turtle_creator(request):
     rospy.loginfo("Initiating Cretion")
     counter = request.amount
     for i in range(0,counter):
-        positionrequest = SpawnRequest(random.uniform(0,10), random.uniform(0,10), random.uniform(0,2),
+        x_pos = random.uniform(0,10)
+        y_pos = random.uniform(0,10)
+        positionrequest = SpawnRequest(x_pos, y_pos, random.uniform(0,2),
                                        'post'+str(i))
         turtlelist.append(serviceclient(positionrequest))
-        pub.publish('post'+str(i))
+        loct = location()
+        loct.x = x_pos
+        loct.y = y_pos
+        pub.publish(loct)
 
     return [counter] #TODO
 
