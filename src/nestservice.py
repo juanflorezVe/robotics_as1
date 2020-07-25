@@ -2,9 +2,11 @@
 
 import rospy
 import random
+
+
 from std_srvs.srv import Empty
 from turtlesim.srv import Spawn, SpawnRequest, SpawnResponse
-from r00184264.srv import TurtlesAmount
+from r00184264.srv import TurtlesAmount, TurtlesAmountResponse
 
 
 rospy.wait_for_service('/spawn')
@@ -13,6 +15,7 @@ turtlelist = []
 
 
 def turtle_creator(empty):
+    rospy.loginfo("Initiating Cretion")
     counter = 5
     while counter > 0:
         print("Test called")
@@ -20,13 +23,10 @@ def turtle_creator(empty):
                                        'post'+str(counter))
         turtlelist.append(serviceclient(positionrequest))
         counter -= 1
-    return []
+    return [] #TODO
 
 
 rospy.init_node('nest_server')
-rospy.Service('/nest_service', Empty, turtle_creator)
+rospy.Service('/nest_service', TurtlesAmount, turtle_creator)
 
 rospy.spin()
-
-
-
