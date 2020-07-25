@@ -4,7 +4,6 @@ import rospy
 import random
 
 
-from std_srvs.srv import Empty
 from turtlesim.srv import Spawn, SpawnRequest, SpawnResponse
 from r00184264.srv import TurtlesAmount, TurtlesAmountResponse
 
@@ -17,12 +16,10 @@ turtlelist = []
 def turtle_creator(request):
     rospy.loginfo("Initiating Cretion")
     counter = request.amount
-    while counter > 0:
-        print("Test called")
+    for i in range(0,counter):
         positionrequest = SpawnRequest(random.uniform(0,10), random.uniform(0,10), random.uniform(0,2),
-                                       'post'+str(counter))
+                                       'post'+str(i))
         turtlelist.append(serviceclient(positionrequest))
-        counter -= 1
     return [] #TODO
 
 
