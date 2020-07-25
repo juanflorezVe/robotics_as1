@@ -3,6 +3,10 @@
     <node pkg="turtlesim" type="turtlesim_node" name="floor" output="screen">
     </node>
 
+    <node pkg="r00184264_a1" type="dispatcher.py" name="dispatcher" output="screen">
+    </node>
+
+
     <node pkg="r00184264_a1" type="nestservice.py" name="spawner" output="screen">
     </node>
 
