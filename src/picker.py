@@ -20,23 +20,8 @@ rospy.init_node('picker')
 rospy.wait_for_service('/next_closest_turtle')
 nextturtleclient = rospy.ServiceProxy('/next_closest_turtle', ClosestObj)
 rospy.loginfo("THE SERVICE FOR PICKER IS UP")
-#TODO: calculate starting position
+#TODO: make the loop
 nextlocationrequest = ClosestObjRequest()
-#TODO send the real request with the right position
-nextlocationrequest.x = 0.0
-nextlocationrequest.y = 0.0
-nextobjectresponseFAKE = nextturtleclient(nextlocationrequest)
-
-rospy.loginfo('passed 456')
-
-
-
-rospy.wait_for_service('/pickup_service')
-pickuprequest = KillRequest()
-pickuprequest.name = "post1"
-
-pickupclient = rospy.ServiceProxy('/pickup_service', Kill)
-
-rs = pickupclient(pickuprequest)
+nextobjectresponse = nextturtleclient(nextlocationrequest)
 
 print "the end"

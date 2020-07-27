@@ -12,10 +12,10 @@ from turtlesim.srv import Spawn, SpawnRequest, SpawnResponse, KillRequest, Kill
 from r00184264_a1.msg import location
 from r00184264_a1.srv import ClosestObj, ClosestObjResponse
 from turtlesim.msg import Pose
+from math import fabs
 
 print "HELLO I AM DISPATCHER"
 rospy.init_node("dispatcher")
-
 
 
 #======================================
@@ -73,26 +73,28 @@ def get_closest_turtle(location):
     '''
     Using the manhattan algo, get the closest turtle in the floor to the location
     '''
-    tmp_a = ClosestObjResponse()
-    print 'AA'
-    tmp_a.name = 'post1'
-    print 'BB'
-    tmp_a.x = 1 #turtlesinthefloor['post1'][0]
-    tmp_a.y = 1 #turtlesinthefloor['post1'][1]
-    rospy.loginfo("Sending NExt CLOSEST T {} {} {}".format(tmp_a.name, tmp_a.x, tmp_a.y))
-    return tmp_a
-    #TODO change it
-    closest = 1000000
+    #fk = ClosestObjResponse()
+    #fk.name='post1'
+    #return fk
+    closesttrt = '1000000'
+    closest = 100000
     for i in turtlesinthefloor:
-        tmp = (turtle1_position[0]-turtlesinthefloor[i][0])+(turtle1_position[1]-turtlesinthefloor[i][1])
+        print i
+        tmp = fabs((turtle1_position[0]-turtlesinthefloor[i][0])+
+                       (turtle1_position[1]-turtlesinthefloor[i][1]))
+        print tmp
         if tmp < closest:
             closest = tmp
             closesttrt = i
+        print closesttrt
 
     nextturtle = ClosestObjResponse()
     nextturtle.name = closesttrt
-    nextturtle.x = turtlesinthefloor[closest][0]
-    nextturtle.y = turtlesinthefloor[closest][1]
+    nextturtle.x = turtlesinthefloor[closesttrt][0]
+    nextturtle.y = turtlesinthefloor[closesttrt][1]
+
+    rospy.loginfo("Sending NExt CLOSEST T {} {} {}".format(nextturtle.name,
+                                                 nextturtle.x, nextturtle.y))
     return nextturtle
 
 
