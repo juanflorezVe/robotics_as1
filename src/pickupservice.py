@@ -4,7 +4,7 @@ import rospy
 import random
 
 
-from turtlesim.srv import Spawn, SpawnRequest, SpawnResponse
+from turtlesim.srv import Spawn, SpawnRequest, SpawnResponse, Kill, KillResponse, KillRequest
 from r00184264.srv import TurtlesAmount, TurtlesAmountResponse
 from std_msgs.msg import String
 from r00184264_a1.msg import location
@@ -25,20 +25,16 @@ pub1 = rospy.Publisher("robot1_topic", location, queue_size=15)
 #    pub.publish(move_turtle)
 #    rospy.loginfo("Finished service /move_turtle_in_arc")
 #    return SpawnResponse()
+killserviceclient = rospy.ServiceProxy('/Kill', Kill)
 
-def turtle_collector(request):
+def turtle_collector(name):
     rospy.loginfo("Initiating Collection")
-    counter = request.amount
-    for i in range(0,counter):
-        loct = location()
-        loct.x = 1
-        loct.y = 2
-        loct.name = 'testname'
-        pub1.publish(loct)
-    return TurtlesAmountResponse()
-
+    nextT = location()
+    nextT.name = name.name #TODO
+    pub1.publish(nextT)
+    return KillResponse()#TODO
 #move_turtle = Twist()
 rospy.init_node('pickup_server')
-rospy.Service('/pickup_service', TurtlesAmount, turtle_collector)
+rospy.Service('/pickup_service', Kill, turtle_collector)
 
 rospy.spin()
