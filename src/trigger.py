@@ -11,7 +11,7 @@ rospy.wait_for_service('/nest_service')
 serviceclient = rospy.ServiceProxy('/nest_service', TurtlesAmount)
 
 request_object = TurtlesAmountRequest()
-request_object.amount = 3
+request_object.amount = 0
 
 result = serviceclient(request_object)
 

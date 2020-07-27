@@ -73,9 +73,9 @@ def get_closest_turtle(location):
     '''
     Using the manhattan algo, get the closest turtle in the floor to the location
     '''
-    #fk = ClosestObjResponse()
-    #fk.name='post1'
-    #return fk
+    if len(turtlesinthefloor) == 0:
+        return ClosestObjResponse()
+
     closesttrt = '1000000'
     closest = 100000
     for i in turtlesinthefloor:

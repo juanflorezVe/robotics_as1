@@ -20,6 +20,7 @@ pub = rospy.Publisher("floor_topic", location, queue_size=15)
 def turtle_creator(request):
     rospy.loginfo("Initiating Cretion")
     counter = request.amount
+    response = TurtlesAmountResponse()
     for i in range(0,counter):
         x_pos = random.uniform(0,10)
         y_pos = random.uniform(0,10)
@@ -32,7 +33,6 @@ def turtle_creator(request):
         loct.name = turtlelist[-1].name
         pub.publish(loct)
 
-        response = TurtlesAmountResponse()
         response.total = len(turtlelist)
     return response
 
